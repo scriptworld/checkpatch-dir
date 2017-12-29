@@ -5,5 +5,5 @@ bulk check in the kernel source directory with checkpatch.pl
 
 ````bash
  $ cd $ROOT_PATH_OF_KERNEL_SOURCE
- $ checkpatch-dir.sh $MYDIR
+ $ checkpatch-dir.sh $TARGET_DIR
 ````
