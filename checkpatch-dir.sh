@@ -18,24 +18,21 @@ dir_search () {
 	done
 }
 
-if [[ $1 == '-h' || $1 == '--help' ]]
-then
-	vim -c $OPTION $OUTPUT
-	echo "Usage :
-	$ cd \$ROOT_PATH_OF_KERNEL_SOURCE
-	$ checkpatch-dir.sh \$TARGET_DIR"
-elif [[ $# -eq 0 ]]
-then
-	echo "No arguments provided"
-	exit 1
-else
-	echo "Please wait.."
-	dir_search $1 > $OUTPUT
-	cat $OUTPUT | grep "please review"
-	echo "check the file $OUTPUT : [y/n]"
-	read C
-	if [[ $C == 'y' ]]
-	then
-		$EDITOR $OUTPUT
-	fi	
-fi
+case $1 in
+	-h|--help|"")
+		echo "Usage :
+		$ cd \$ROOT_PATH_OF_KERNEL_SOURCE
+		$ checkpatch-dir.sh \$TARGET_DIR"
+		;;
+	*)
+		echo "Please wait.."
+		dir_search $1 > $OUTPUT
+		cat $OUTPUT | grep "please review"
+		echo "check the file $OUTPUT : [y/n]"
+		read C
+		if [[ $C == 'y' ]]
+		then
+			$EDITOR $OUTPUT
+		fi
+		;;
+esac
